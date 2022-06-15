@@ -1,1 +1,1 @@
-# digital_breakthrough_2022_yaroslavl
+# Yaroslaval digital_breakthrough_2022
