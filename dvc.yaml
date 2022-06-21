@@ -1,0 +1,7 @@
+stages:
+  preprocess_original_data:
+    cmd: python preprocess.py
+    deps:
+    - data/original
+    outs:
+    - data/prepared
