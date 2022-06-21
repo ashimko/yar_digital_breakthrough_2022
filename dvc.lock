@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  preprocess_original_data:
+    cmd: python preprocess.py
+    deps:
+    - path: data/original
+      md5: 0615d6fa72b8f3aa6bd7c7d2b1810415.dir
+      size: 663790
+      nfiles: 3
+    outs:
+    - path: data/prepared
+      md5: b36f2aa8271d5b96c59bcda1a8edc69e.dir
+      size: 186999
+      nfiles: 2

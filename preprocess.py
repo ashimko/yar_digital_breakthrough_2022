@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 import re
-from config import *
+import config as cfg
+from helper import check_path
 
 
 def rename_data(data: pd.DataFrame) -> pd.DataFrame:
-    data = data.rename(columns=RENAME_MAP)
+    data = data.rename(columns=cfg.RENAME_MAP)
     data = data.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
     return data
 
@@ -79,10 +80,10 @@ def add_features(data: pd.DataFrame) -> pd.DataFrame:
 
 
 def cast_types(data: pd.DataFrame) -> pd.DataFrame:
-    data[REAL_COLS] = data[REAL_COLS].astype(np.float32)
-    data[BINARY_COLS] = data[BINARY_COLS].astype(np.int8)
-    data[CAT_ORDERED_COLS] = data[CAT_ORDERED_COLS].fillna(-1).astype(np.int32)
-    data[CAT_UNORDERED_COLS] = data[CAT_UNORDERED_COLS].fillna('NA').astype('category')
+    data[cfg.REAL_COLS] = data[cfg.REAL_COLS].astype(np.float32)
+    data[cfg.BINARY_COLS] = data[cfg.BINARY_COLS].astype(np.int8)
+    data[cfg.CAT_ORDERED_COLS] = data[cfg.CAT_ORDERED_COLS].fillna(-1).astype(np.int32)
+    data[cfg.CAT_UNORDERED_COLS] = data[cfg.CAT_UNORDERED_COLS].fillna('NA').astype('category')
     return data
 
 
@@ -95,13 +96,14 @@ def preprocess(data: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    train = pd.read_csv(ORIG_TRAIN_DATA_PATH).drop('ID_y', axis=1)
+    check_path(cfg.PREPARED_DATA_PATH)
+    train = pd.read_csv(cfg.ORIG_TRAIN_DATA_PATH).drop('ID_y', axis=1)
     train = preprocess(train)
-    train.to_pickle(PREPARED_TRAIN_DATA_PATH)
+    train.to_pickle(cfg.PREPARED_TRAIN_DATA_PATH)
 
-    test = pd.read_csv(ORIG_TEST_DATA_PATH)
+    test = pd.read_csv(cfg.ORIG_TEST_DATA_PATH)
     test = preprocess(test)
-    test.to_pickle(PREPARED_TEST_DATA_PATH)
+    test.to_pickle(cfg.PREPARED_TEST_DATA_PATH)
 
 
 if __name__ == '__main__':

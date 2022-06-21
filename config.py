@@ -5,8 +5,9 @@ HOME_PATH = '/Users/alexey.shimko/my_repositories/yar_digital_breakthrough_2022'
 ORIG_TRAIN_DATA_PATH = os.path.join(HOME_PATH, 'data/original/train.csv')
 ORIG_TEST_DATA_PATH = os.path.join(HOME_PATH, 'data/original/test.csv')
 
-PREPARED_TRAIN_DATA_PATH = os.path.join(HOME_PATH, 'data/prepared/train.pkl')
-PREPARED_TEST_DATA_PATH = os.path.join(HOME_PATH, 'data/prepared/test.pkl')
+PREPARED_DATA_PATH = os.path.join(HOME_PATH, 'data/prepared')
+PREPARED_TRAIN_DATA_PATH = os.path.join(PREPARED_DATA_PATH, 'train.pkl')
+PREPARED_TEST_DATA_PATH = os.path.join(PREPARED_DATA_PATH, 'test.pkl')
 
 SAMPLE_SUBMISSION_PATH = os.path.join(HOME_PATH, 'data/original/sample_solution.csv')
 SUBMISSION_PATH = os.path.join(HOME_PATH, 'submissions')
