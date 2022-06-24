@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 #!/usr/local/bin/bash
 
 declare -A model_names=(
@@ -8,6 +9,8 @@ declare -A model_names=(
   ['mlp']="baseline"
   ['rf']="baseline"
   ['svm']="baseline"
+  ['stacking']="baseline"
+  ['lgb']="baseline"
 )
 
 for model_name in ${!model_names[@]}; do
