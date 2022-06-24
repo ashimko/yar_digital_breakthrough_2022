@@ -1,7 +1,7 @@
 import os
 
 # PATHS
-HOME_PATH = '/Users/alexey.shimko/my_repositories/yar_digital_breakthrough_2022'
+HOME_PATH = os.path.dirname(os.path.abspath(__file__))
 ORIG_TRAIN_DATA_PATH = os.path.join(HOME_PATH, 'data/original/train.csv')
 ORIG_TEST_DATA_PATH = os.path.join(HOME_PATH, 'data/original/test.csv')
 
