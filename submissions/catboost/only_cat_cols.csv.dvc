@@ -1,0 +1,4 @@
+outs:
+- md5: f44f0ed979f59f542699180986819ffc
+  size: 15537
+  path: only_cat_cols.csv

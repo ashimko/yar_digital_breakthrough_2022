@@ -1,2 +1,4 @@
 /baseline.csv
 /baseline.pkl
+/only_real_cols.pkl
+/only_cat_cols.pkl

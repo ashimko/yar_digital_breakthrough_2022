@@ -28,3 +28,14 @@ def save_model(model: BaseEstimator, path: str) -> None:
 
 def squeeze_pred_proba(pred_proba: list) -> np.ndarray:
     return np.hstack([x[:, 1].reshape(-1, 1)  for x in pred_proba])
+
+
+def asemble_data(base_path: str, model_names) -> pd.DataFrame:
+    df = []
+    for model_name in model_names:
+        for experiment in model_names[model_name]:
+            path = os.path.join(base_path, model_name, f'{experiment}.pkl')
+            tdf = pd.read_pickle(path)
+            tdf.columns = [f'{model_name}_{experiment}_{col}' for col in tdf.columns]
+            df.append(tdf)
+    return pd.concat(df, axis=1)

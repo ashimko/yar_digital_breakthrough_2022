@@ -1,0 +1,4 @@
+outs:
+- md5: 47ab53e401fb0082cc281788c964c67f
+  size: 54301
+  path: only_cat_cols.pkl
