@@ -1,0 +1,4 @@
+outs:
+- md5: 8124906f86ad6ca40569eea4ad54920e
+  size: 54301
+  path: baseline.pkl

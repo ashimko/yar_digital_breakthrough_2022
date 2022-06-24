@@ -1,4 +1,4 @@
 outs:
 - md5: 78cad0459e32c5a2881ce335562ed27e
   size: 36549
-  path: baseline.csv
+  path: baseline.pkl

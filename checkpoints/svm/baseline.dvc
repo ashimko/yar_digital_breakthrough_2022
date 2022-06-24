@@ -1,0 +1,5 @@
+outs:
+- md5: 318346ecf21fd84d8b5d1b48eb39fcff.dir
+  size: 3509676
+  nfiles: 5
+  path: baseline
