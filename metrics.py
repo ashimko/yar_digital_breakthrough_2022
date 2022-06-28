@@ -7,7 +7,7 @@ from typing import Union
 def compute_single_col_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     try:
         max_metric = float('-inf')
-        for tresh in np.round(np.unique(y_pred), 3):
+        for tresh in np.round(np.unique(y_pred), 4):
             curr_metric = recall_score(y_true, np.where(y_pred >= tresh, 1, 0), average='macro', zero_division=0)
             if curr_metric > max_metric:
                 max_metric = curr_metric
@@ -36,19 +36,20 @@ def get_tresholds(y_true: pd.DataFrame, y_pred: pd.DataFrame) -> dict:
         y_pred = np.hstack([pred[:, 1].reshape(-1, 1) for pred in y_pred])
         y_pred = pd.DataFrame(data=y_pred, index=y_true.index, columns=y_true.columns)
         
-    avg_metric = 0
-    tresholds = {}
+    metrics = []
+    thresholds = {}
     for col in y_true.columns:
         max_metric = float('-inf')
-        for tresh in y_pred[col].unique():
-            curr_metric = recall_score(y_true[col].values, np.where(y_pred[col].values >= tresh, 1, 0), average='macro', zero_division=0)
+        for thresh in y_pred[col].unique():
+            curr_metric = recall_score(y_true[col].values, np.where(y_pred[col].values >= thresh, 1, 0), average='macro', zero_division=0)
             if curr_metric > max_metric:
                 max_metric = curr_metric
-                tresholds[col] = tresh
-        avg_metric += max_metric
-    avg_metric /= len(y_true.columns)
-    print(avg_metric)
-    return tresholds
+                thresholds[col] = thresh
+        metrics.append(max_metric)
+    
+    print(metrics)
+    print(np.mean(metrics), np.std(metrics))
+    return thresholds
 
 
 def compute_weird_pred_score(y_true: np.ndarray, y_pred:np.ndarray) -> float:

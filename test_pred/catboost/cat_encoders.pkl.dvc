@@ -1,0 +1,4 @@
+outs:
+- md5: ca8df7bff0693459f2750cb969f9a5c8
+  size: 36549
+  path: cat_encoders.pkl

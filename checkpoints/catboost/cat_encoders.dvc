@@ -1,0 +1,5 @@
+outs:
+- md5: 6dcfd21facddbeb545734484c19b9688.dir
+  size: 71732516
+  nfiles: 29
+  path: cat_encoders

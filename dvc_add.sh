@@ -1,8 +1,8 @@
-#!/usr/bin/bash
 #!/usr/local/bin/bash
+#!/usr/bin/bash
 
 declare -A model_names=(
-  ['catboost']="baseline only_real_cols only_cat_cols"
+  ['catboost']="baseline only_real_cols only_cat_cols cat_encoders"
   ['blending']="baseline"
   ['gbt']="baseline"
   ['logreg']="baseline"
@@ -11,6 +11,7 @@ declare -A model_names=(
   ['svm']="baseline"
   ['stacking']="baseline"
   ['lgb']="baseline"
+  ['xgb']="baseline"
 )
 
 for model_name in ${!model_names[@]}; do
