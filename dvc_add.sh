@@ -1,5 +1,5 @@
-#!/usr/local/bin/bash
 #!/usr/bin/bash
+#!/usr/local/bin/bash
 
 declare -A model_names=(
   ['catboost']="baseline only_real_cols only_cat_cols cat_encoders"
