@@ -16,19 +16,23 @@ def compute_single_col_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
         return 0
     
 
-def compute_weird_pred_proba_score(y_true: np.ndarray, y_pred: Union[list, np.ndarray]) -> float:
+def compute_weird_pred_proba_score(y_true: np.ndarray, y_pred: Union[list, np.ndarray], sub_std: bool=False) -> float:
     if not isinstance(y_true, np.ndarray):
         y_true = y_true.values
 
     if isinstance(y_pred, list):
         y_pred = np.hstack([pred[:, 1].reshape(-1, 1) for pred in y_pred])
 
-    avg_metric = 0
+    metrics = []
     for col in range(y_true.shape[1]):
         max_metric = compute_single_col_score(y_true[:, col], y_pred[:, col])
-        avg_metric += max_metric
-    avg_metric /= y_true.shape[1]
-    return avg_metric
+        metrics.append(max_metric)
+    avg, std = np.mean(metrics), np.std(metrics)
+    print(metrics)
+    print(avg, std)
+    if sub_std:
+        return avg - std
+    return avg
 
 
 def get_tresholds(y_true: pd.DataFrame, y_pred: pd.DataFrame) -> dict:
@@ -58,9 +62,9 @@ def compute_weird_pred_score(y_true: np.ndarray, y_pred:np.ndarray) -> float:
 
     for col in range(y_true.shape[1]):
         curr_metric = recall_score(y_true[col], y_pred, average='macro', zero_division=0)
-        avg_metric += curr_metric
-    avg_metric /= y_true.shape[1]
-    return avg_metric
+        avg += curr_metric
+    avg /= y_true.shape[1]
+    return avg
 
 
 def get_weird_pred_proba_score():
