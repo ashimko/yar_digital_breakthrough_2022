@@ -1,0 +1,4 @@
+outs:
+- md5: 2bd09362fba4355b5b953034383fcfd0
+  size: 36549
+  path: depthwise.pkl

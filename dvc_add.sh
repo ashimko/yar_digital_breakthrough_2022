@@ -2,7 +2,7 @@
 #!/usr/local/bin/bash
 
 declare -A model_names=(
-  ['catboost']="baseline only_real_cols only_cat_cols cat_encoders"
+  ['catboost']="baseline only_real_cols only_cat_cols cat_encoders baseline_optuna lossguide_optuna depthwise lossguide selected_features"
   ['blending']="baseline"
   ['gbt']="baseline"
   ['logreg']="baseline"
@@ -12,6 +12,7 @@ declare -A model_names=(
   ['stacking']="baseline"
   ['lgb']="baseline"
   ['xgb']="baseline"
+  ['keras']="baseline"
 )
 
 for model_name in ${!model_names[@]}; do

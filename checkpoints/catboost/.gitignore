@@ -2,3 +2,8 @@
 /only_real_cols
 /only_cat_cols
 /cat_encoders
+/baseline_optuna
+/lossguide_optuna
+/depthwise
+/lossguide
+/selected_features

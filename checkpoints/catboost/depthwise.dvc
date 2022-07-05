@@ -1,0 +1,5 @@
+outs:
+- md5: 1b149fcad85544b9485a991fa2f55a6e.dir
+  size: 59435360
+  nfiles: 42
+  path: depthwise

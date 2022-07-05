@@ -2,3 +2,8 @@
 /only_real_cols.pkl
 /only_cat_cols.pkl
 /cat_encoders.pkl
+/baseline_optuna.pkl
+/lossguide_optuna.pkl
+/depthwise.pkl
+/lossguide.pkl
+/selected_features.pkl

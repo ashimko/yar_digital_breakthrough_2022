@@ -17,7 +17,7 @@ def compute_single_col_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     
 
 def compute_weird_pred_proba_score(y_true: np.ndarray, y_pred: Union[list, np.ndarray], sub_std: bool=False) -> float:
-    if not isinstance(y_true, np.ndarray):
+    if isinstance(y_true, pd.DataFrame):
         y_true = y_true.values
 
     if isinstance(y_pred, list):
