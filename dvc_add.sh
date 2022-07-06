@@ -2,7 +2,7 @@
 #!/usr/local/bin/bash
 
 declare -A model_names=(
-  ['catboost']="baseline only_real_cols only_cat_cols cat_encoders baseline_optuna lossguide_optuna depthwise lossguide selected_features"
+  ['catboost']="baseline only_real_cols only_cat_cols cat_encoders baseline_optuna lossguide_optuna depthwise lossguide selected_features extcv"
   ['blending']="baseline"
   ['gbt']="baseline"
   ['logreg']="baseline"

@@ -19,6 +19,8 @@ def compute_single_col_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
 def compute_weird_pred_proba_score(y_true: np.ndarray, y_pred: Union[list, np.ndarray], sub_std: bool=False) -> float:
     if isinstance(y_true, pd.DataFrame):
         y_true = y_true.values
+    if isinstance(y_pred, pd.DataFrame):
+        y_pred = y_pred.values
 
     if isinstance(y_pred, list):
         y_pred = np.hstack([pred[:, 1].reshape(-1, 1) for pred in y_pred])
@@ -35,7 +37,7 @@ def compute_weird_pred_proba_score(y_true: np.ndarray, y_pred: Union[list, np.nd
     return avg
 
 
-def get_tresholds(y_true: pd.DataFrame, y_pred: pd.DataFrame) -> dict:
+def get_tresholds(y_true: pd.DataFrame, y_pred: pd.DataFrame, verbose=True) -> dict:
     if isinstance(y_pred, list):
         y_pred = np.hstack([pred[:, 1].reshape(-1, 1) for pred in y_pred])
         y_pred = pd.DataFrame(data=y_pred, index=y_true.index, columns=y_true.columns)
@@ -44,26 +46,34 @@ def get_tresholds(y_true: pd.DataFrame, y_pred: pd.DataFrame) -> dict:
     thresholds = {}
     for col in y_true.columns:
         max_metric = float('-inf')
-        for thresh in y_pred[col].unique():
+        for thresh in np.round(y_pred[col].unique(), 4):
             curr_metric = recall_score(y_true[col].values, np.where(y_pred[col].values >= thresh, 1, 0), average='macro', zero_division=0)
             if curr_metric > max_metric:
                 max_metric = curr_metric
                 thresholds[col] = thresh
         metrics.append(max_metric)
     
-    print(metrics)
-    print(np.mean(metrics), np.std(metrics))
+    if verbose:
+        print(metrics)
+        print(np.mean(metrics), np.std(metrics))
     return thresholds
 
 
-def compute_weird_pred_score(y_true: np.ndarray, y_pred:np.ndarray) -> float:
-    if not isinstance(y_true, np.ndarray):
+def compute_weird_pred_score(y_true: np.ndarray, y_pred :np.ndarray, verbose=True) -> float:
+    metrics = []
+    if isinstance(y_true, pd.DataFrame):
         y_true = y_true.values
+    if isinstance(y_pred, pd.DataFrame):
+        y_pred = y_pred.values
 
     for col in range(y_true.shape[1]):
-        curr_metric = recall_score(y_true[col], y_pred, average='macro', zero_division=0)
-        avg += curr_metric
-    avg /= y_true.shape[1]
+        curr_metric = recall_score(y_true[col], y_pred[col], average='macro', zero_division=0)
+        metrics.append(curr_metric)
+    
+    avg, std = np.mean(metrics), np.std(metrics)
+    if verbose:
+        print(metrics)
+        print(avg, std)
     return avg
 
 

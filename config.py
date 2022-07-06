@@ -34,7 +34,7 @@ RENAME_MAP = {
     'Хроническое заболевание легких': 'chronic_lung_disease',
     'Бронжиальная астма': 'bronchial_asthma',
     'Туберкулез легких ': 'pulmonary_tuberculosis',
-    'ВИЧ/СПИД': 'HIV_AIDS',
+    'ВИЧ/СПИД': 'hiv_aids',
     'Регулярный прим лекарственных средств': 'regular_medication_intake',
     'Травмы за год': 'injuries_per_year',
     'Переломы': 'fractures',
