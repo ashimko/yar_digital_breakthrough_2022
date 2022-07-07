@@ -49,22 +49,24 @@ def asemble_data(base_path: str, model_names) -> pd.DataFrame:
     return pd.concat(df, axis=1)
 
 
-def save_submission(submission: pd.DataFrame, experiment_family_name: str, experiment_name: str):
+def save_submission(submission: pd.DataFrame, experiment_family_name: str, experiment_name: str, suffix: str=''):
     submission_path = os.path.join(cfg.SUBMISSION_PATH, experiment_family_name)
     check_path(submission_path)
-    submission.to_csv(os.path.join(submission_path, f'{experiment_name}.csv'))
+    if suffix:
+        suffix = '_' + suffix
+    submission.to_csv(os.path.join(submission_path, f'{experiment_name}{suffix}.csv'))
 
 
-def save_pred_proba_oof(pred_proba_oof: pd.DataFrame, experiment_family_name: str, experiment_name: str):
+def save_pred_proba_oof(pred_proba_oof: pd.DataFrame, experiment_family_name: str, experiment_name: str, suffix: str=''):
     pred_proba_oof_path = os.path.join(cfg.OOF_PRED_PATH, experiment_family_name)
     check_path(pred_proba_oof_path)
-    pred_proba_oof.to_pickle(os.path.join(pred_proba_oof_path, f'{experiment_name}.pkl'))
+    pred_proba_oof.to_pickle(os.path.join(pred_proba_oof_path, f'{experiment_name}{suffix}.pkl'))
 
 
-def save_pred_proba_test(pred_proba_test: pd.DataFrame, experiment_family_name: str, experiment_name: str):
+def save_pred_proba_test(pred_proba_test: pd.DataFrame, experiment_family_name: str, experiment_name: str, suffix: str=''):
     pred_proba_test_path = os.path.join(cfg.TEST_PRED_PATH, experiment_family_name)
     check_path(pred_proba_test_path)
-    pred_proba_test.to_pickle(os.path.join(pred_proba_test_path, f'{experiment_name}.pkl'))
+    pred_proba_test.to_pickle(os.path.join(pred_proba_test_path, f'{experiment_name}{suffix}.pkl'))
 
 
 def get_prediction(
