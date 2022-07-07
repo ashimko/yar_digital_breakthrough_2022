@@ -88,12 +88,14 @@ def get_prediction(
     pred_proba_test = pd.DataFrame(data=np.zeros(shape=(len(test_data), len(cfg.TARGETS))), index=test_data.index, columns=cfg.TARGETS)
 
     test_pool = process_input(test_data, shuffle=False)
+    best_iters = []
     fold = 0
     for train_idx, val_idx in tqdm(cv.split(train_data, train_labels), total=n_splits): 
         train_pool = process_input(train_data.iloc[train_idx], train_labels.iloc[train_idx], shuffle=True)
         val_pool = process_input(train_data.iloc[val_idx], train_labels.iloc[val_idx], shuffle=False)
 
-        model = fit_model(train_pool, val_pool)
+        model, best_iter = fit_model(train_pool, val_pool)
+        best_iters.append(best_iter)
         save_model(model, experiment_name, experiment_family_name, fold, suffix)
         
         pred_proba_oof.iloc[val_idx, :] += predict(model, val_pool)
@@ -104,7 +106,7 @@ def get_prediction(
     tresholds = get_tresholds(train_labels, pred_proba_oof)
     prediction = make_prediction(pred_proba_test, tresholds, pred_template, rename_cols=rename_cols)
         
-    return prediction, pred_proba_oof, pred_proba_test
+    return prediction, pred_proba_oof, pred_proba_test, best_iters
 
 
 def evaluate(
