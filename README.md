@@ -1,4 +1,4 @@
-# [Digital breakthrough 2022 Yaroslavl competition](https://hacks-ai.ru/championships/758240)
+# [Digital Breakthrough 2022 Yaroslavl competition](https://hacks-ai.ru/championships/758240)
 
-Top 2 public
-Top 6 privat
+Top 2 public. 
+Top 6 privat. 
